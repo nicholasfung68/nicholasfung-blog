@@ -1,22 +1,66 @@
 module.exports = {
   title: 'Kadima',
   description: 'Nicholas Fung的博客',
-  head: [ // 注入到当前页面的HTML <head> 中的标签
-    ['link', { rel: 'icon', href: '/handinhand.png' }], // 增加一个自定义的favicon（网页标签的图标）
+  head: [
+    ['link', { rel: 'icon', href: '/assets/logo/handinhand.png' }],
   ],
-  base: '/', // 这是部署到github相关的配置
+  base: '/',
   docsDir: 'docs',
   markdown: {
-    lineNumbers: false // 代码块不显示行号
+    lineNumbers: false
   },
   themeConfig: {
+    search: false,
     smoothScroll: true,
-    nav: [ // 导航栏配置
+    lastUpdated: '上次更新',
+    nav: [
       { text: '首页', link: '/' },
-      { text: '文章', link: '/blogs/demo.md' },
+      { text: '文章', link: '/notes/index.md' },
       { text: 'github', link: 'https://github.com/nicholasfung68' }
     ],
-    sidebar: 'auto', // 侧边栏配置
-    sidebarDepth: 2 // 侧边栏显示2级
+    sidebar: getSidebar(),
+    sidebarDepth: 2
   }
+}
+
+function getSidebar() {
+  const sideBarArr = [
+    {
+      title: '网络',
+      children: [
+        { title: 'network', path: '/notes/network/http.md' }
+      ]
+    },
+    {
+      title: '浏览器',
+      children: [
+        { title: 'browser', path: '/notes/browser/browser.md' }
+      ]
+    },
+    {
+      title: '算法',
+      children: [
+        { title: 'algorithm', path: '/notes/algorithm/algorithm.md' }
+      ]
+    },
+    {
+      title: 'Vue',
+      children: [
+        { title: 'Vue路由解耦', path: '/notes/vue/vue-routing-decoupling.md' },
+        { title: '亿点点Vue知识', path: '/notes/vue/some-vue-knowledges.md' },
+      ]
+    },
+    // {
+    //   title: '面试',
+    //   children: [
+    //     { title: 'interview', path: '/notes/interview/interview.md' }
+    //   ]
+    // }
+  ]
+
+  for (item of sideBarArr) {
+    item.collapsable = false
+  }
+
+  return sideBarArr
 }
